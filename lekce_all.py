@@ -39,7 +39,7 @@ x.isupper()
 "ahoj".upper().lower()
 x = "ahoj".upper()
 print(x)
-##--------------------- Lekce $ -----------------------------------------------------------------------------------
+##--------------------- Lekce 4 -----------------------------------------------------------------------------------
 
 """
 What the Code is About
@@ -278,3 +278,94 @@ for idx, value in enumerate(numbers):
 # for a_val, b_val in zip(a_list, b_list):
 #     print(a_val)
 #     print(b_val)
+#--------------------- Lekce 7 ------------------------------------------------------------------------------------
+
+def power(n1: int, n2:int) -> int:
+    return n1 ** n2
+
+type(power(2,3))
+def get_number() -> int:
+    return 1
+
+def get_numbers() -> tuple[int, int]:
+    return 1, 2
+
+type(get_numbers())
+def print_name(name: str) -> None:
+    print("Ahoj ", name)
+
+print_name("Tomas")
+
+x = get_number()
+
+res = power(n1=4, n2=2)
+print(res)
+
+def work() -> None:
+    x,y = get_numbers()
+    print_name("Honza")
+    print(get_number())
+
+work()
+res = get_numbers()
+print(res)
+
+def greet_user(name: str = "user") -> None:
+    print("Hello, welcome to the system,", name)
+
+
+greet_user()
+greet_user("admin")
+
+x = 1
+
+def add_five(number: int) -> int:
+    return number + 5
+
+num = add_five(15)
+
+def foo():
+    print("calling")
+    foo()
+
+foo()
+
+def print_reversed(num: int) -> None:
+    if num == 0:
+        return
+    print(num)
+    print_reversed(num - 1)
+    print("ENDED FOR NUMBER", num)
+
+print_reversed(3)
+
+def test_generator():
+    for i in range(5):
+        yield i
+        print("generator", i)
+    print("generator end")
+
+for x in test_generator():
+    print(x)
+def x_foo(a, b):
+    return a + b
+
+def sum(x, y):
+    result = x + y
+
+    return result
+
+res = sum(10, 20)
+print(res)
+
+def add_numbers(a, b):
+    if a == 0:
+        return 0
+    return a+b
+#--------------------- Lekce 8 ------------------------------------------------------------------------------------
+
+
+#--------------------- Lekce 9 ------------------------------------------------------------------------------------
+
+#--------------------- Lekce 10 ------------------------------------------------------------------------------------
+
