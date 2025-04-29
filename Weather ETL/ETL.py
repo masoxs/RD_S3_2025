@@ -2,30 +2,34 @@ import requests
 import sqlite3
 from datetime import datetime
 
-"""
 # WeatherData class to store and display data
-# class WeatherData:
-#     def __init__(self, date, temperature, condition, city):
-#         self.date = date
-#         self.temperature = temperature
-#         self.condition = condition
-#         self.city = city
-#
-#     def display(self):
-#         print(f"Weather in {self.city} on {self.date}: {self.condition}, {self.temperature}°C")
-#
-#     def to_dict(self):
-#         return {
-#             "date": self.date,
-#             "temperature": self.temperature,
-#             "condition": self.condition,
-#             "city": self.city
-#         }
-"""
+class WeatherData:
+    def __init__(self, date, temperature, condition, city, lon, lat, units):
+        self.date = date
+        self.temperature = temperature
+        self.condition = condition
+        self.city = city
+        self.lon = lon
+        self.lat = lat
+        self.units = units
+
+    def display(self):
+        print(f"Weather in {self.city} on {self.date}: {self.condition}, {self.temperature}°C")
+
+    def to_dict(self):
+        return {
+            "date": self.date,
+            "temperature": self.temperature,
+            "condition": self.condition,
+            "city": self.city,
+            "lon": self.lon,
+            "lat": self.lat,
+            "units": self.units
+        }
 
 # Fetch weather data from the API
-def fetch_weather(city, api_key):
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+def fetch_weather(lon, lat, units, appid, city):
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units={units}&appid={appid}"
     try:
         # Make the API request
         response = requests.get(url)
@@ -34,10 +38,10 @@ def fetch_weather(city, api_key):
 
         # Extract and transform data
         date = datetime.now().strftime("%Y-%m-%d")
-        temperature = data["main"]["temp"] - 273.15  # Convert Kelvin to Celsius
-        condition = data["weather"][0]["description"]
+        temperature = data["current"]["temp"]  # One Call API uses 'current'
+        condition = data["current"]["weather"][0]["description"]
 
-        return WeatherData(date, temperature, condition, city)
+        return WeatherData(date, temperature, condition, city, lon, lat, units)
 
     except requests.exceptions.ConnectionError:
         print("Error: No internet connection or API server is down.")
@@ -72,15 +76,19 @@ def save_to_database(weather_data):
                 date TEXT,
                 temperature REAL,
                 condition TEXT,
-                city TEXT
+                city TEXT,
+                lon REAL,
+                lat REAL,
+                units TEXT
             )
         """)
 
         # Insert data
         cursor.execute("""
-            INSERT INTO weather (date, temperature, condition, city)
-            VALUES (?, ?, ?, ?)
-        """, (weather_data.date, weather_data.temperature, weather_data.condition, weather_data.city))
+            INSERT INTO weather (date, temperature, condition, city, lon, lat, units)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (weather_data.date, weather_data.temperature, weather_data.condition,
+              weather_data.city, weather_data.lon, weather_data.lat, weather_data.units))
 
         conn.commit()
 
@@ -92,15 +100,19 @@ def save_to_database(weather_data):
         print(f"Unexpected database error: {e}")
     finally:
         # Always close the connection
-        conn.close()
+        if 'conn' in locals():
+            conn.close()
 
 # Main function to run the ETL process
 def main():
-    api_key = "YOUR_API_KEY"  # Replace with your actual OpenWeatherMap API key
-    city = "London"
+    lat = 33.44
+    lon = -94.04
+    units = "metric"  # For Celsius
+    appid = "811543ad77158843bef8efe9f246a8c140"  # Replace with your actual OpenWeatherMap API key
+    city = "Texarkana"  # Example city for display
 
     # Fetch and process weather data
-    weather = fetch_weather(city, api_key)
+    weather = fetch_weather(lon, lat, units, appid, city)
     if weather:
         weather.display()
         save_to_database(weather)
