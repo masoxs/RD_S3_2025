@@ -508,3 +508,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+class Foo:
+    y = 6
+    def __init__(self):
+        self.x = 5
+    @staticmethod
+    def print_something():
+        print("somthing")
+
+    @classmethod
+    def another_print(cls):
+        print("somethig else")
+        cls.print_something
+
