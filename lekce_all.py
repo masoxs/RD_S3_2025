@@ -496,7 +496,7 @@ def main():
     lon = -94.04
     units = "metric"  # For Celsius
     appid = "811543ad77158843bef8efe9f246a8c140"  # Replace with your actual OpenWeatherMap API key
-    city = "Texarkana"  # Example city for display
+    city = "Texas"  # Example city for display
 
     # Fetch and process weather data
     weather = fetch_weather(lon, lat, units, appid, city)
