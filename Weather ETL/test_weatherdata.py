@@ -10,7 +10,7 @@ class TestWeatherData(unittest.TestCase):
             date="2025-05-28",
             temperature=25.5,
             condition="clear sky",
-            city="Texas",
+            city="Houston",
             lon=-94.04,
             lat=33.44,
             units="metric"
@@ -22,7 +22,7 @@ class TestWeatherData(unittest.TestCase):
         sys.stdout = captured_output  # Redirect stdout
         self.weather.display()
         sys.stdout = sys.__stdout__  # Restore stdout
-        expected_output = "Weather in Texas on 2025-05-28: clear sky, 25.5°C\n"
+        expected_output = "Weather in Houston on 2025-05-28: clear sky, 25.5°C\n"
         self.assertEqual(captured_output.getvalue(), expected_output)
 
     def test_display_empty_condition(self):
@@ -31,7 +31,7 @@ class TestWeatherData(unittest.TestCase):
             date="2025-05-28",
             temperature=0,
             condition="",
-            city="Texas",
+            city="Houston",
             lon=-94.04,
             lat=33.44,
             units="metric"
@@ -40,7 +40,7 @@ class TestWeatherData(unittest.TestCase):
         sys.stdout = captured_output
         weather.display()
         sys.stdout = sys.__stdout__
-        expected_output = "Weather in Texas on 2025-05-28: , 0°C\n"
+        expected_output = "Weather in Houston on 2025-05-28: , 0°C\n"
         self.assertEqual(captured_output.getvalue(), expected_output)
 
     def test_to_dict(self):
@@ -49,7 +49,7 @@ class TestWeatherData(unittest.TestCase):
             "date": "2025-05-28",
             "temperature": 25.5,
             "condition": "clear sky",
-            "city": "Texas",
+            "city": "Houston",
             "lon": -94.04,
             "lat": 33.44,
             "units": "metric"
@@ -62,7 +62,7 @@ class TestWeatherData(unittest.TestCase):
             date="2025-05-28",
             temperature=0,
             condition=None,
-            city="Texas",
+            city="Houston",
             lon=-94.04,
             lat=33.44,
             units=None
@@ -71,7 +71,7 @@ class TestWeatherData(unittest.TestCase):
             "date": "2025-05-28",
             "temperature": 0,
             "condition": None,
-            "city": "Texas",
+            "city": "Houston",
             "lon": -94.04,
             "lat": 33.44,
             "units": None

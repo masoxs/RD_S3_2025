@@ -30,6 +30,7 @@ class WeatherData:
 # Fetch weather data from the API
 def fetch_weather(lon, lat, units, appid, city):
     url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units={units}&appid={appid}"
+# api key 8f327b29d834c43d4dca97d064f69a77
     try:
         # Make the API request
         response = requests.get(url)
@@ -105,11 +106,11 @@ def save_to_database(weather_data):
 
 # Main function to run the ETL process
 def main():
-    lat = 33.44
-    lon = -94.04
+    lat = 29.64
+    lon = 95.28
     units = "metric"  # For Celsius
-    appid = "811543ad77158843bef8efe9f246a8c140"  # Replace with your actual OpenWeatherMap API key
-    city = "Texas"  # Example city for display
+    appid = "8f327b29d834c43d4dca97d064f69a77"  # Replace with your actual OpenWeatherMap API key
+    city = "Houston"  # Example city for display
 
     # Fetch and process weather data
     weather = fetch_weather(lon, lat, units, appid, city)
