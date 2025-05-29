@@ -522,3 +522,29 @@ class Foo:
         print("somethig else")
         cls.print_something
 
+#--------------------- test  ------------------------------------------------------------------------------------
+
+import requests
+
+def test_api_key():
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&exclude=hourly,daily&appid={db9d09ddea4c35eaccbd69c825ac7bed}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Check for HTTP errors
+        data = response.json()
+        print("Success! API key is valid. Sample data:")
+        print(f"Temperature: {data['current']['temp']}°C")
+        print(f"Condition: {data['current']['weather'][0]['description']}")
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 401:
+            print("Error: Invalid API key. Verify your OpenWeatherMap API key.")
+        elif e.response.status_code == 429:
+            print("Error: Rate limit exceeded. Check your subscription plan.")
+        else:
+            print(f"Error: API request failed with status code {e.response.status_code}.")
+    except Exception as e:
+        print(f"Error: {str(e)}")
+
+if __name__ == "__main__":
+    test_api_key()

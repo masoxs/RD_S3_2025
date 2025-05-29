@@ -29,8 +29,8 @@ class WeatherData:
 
 # Fetch weather data from the API
 def fetch_weather(lon, lat, units, appid, city):
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units={units}&appid={appid}"
-# api key 8f327b29d834c43d4dca97d064f69a77
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&units={metric}&appid={db9d09ddea4c35eaccbd69c825ac7bed}"
+# api key db9d09ddea4c35eaccbd69c825ac7bed
     try:
         # Make the API request
         response = requests.get(url)
@@ -109,7 +109,7 @@ def main():
     lat = 29.64
     lon = 95.28
     units = "metric"  # For Celsius
-    appid = "8f327b29d834c43d4dca97d064f69a77"  # Replace with your actual OpenWeatherMap API key
+    appid = "db9d09ddea4c35eaccbd69c825ac7bed"  # Replace with your actual OpenWeatherMap API key
     city = "Houston"  # Example city for display
 
     # Fetch and process weather data
