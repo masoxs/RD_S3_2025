@@ -527,8 +527,7 @@ class Foo:
 import requests
 
 def test_api_key():
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&exclude=hourly,daily&appid={db9d09ddea4c35eaccbd69c825ac7bed}"
-
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&units=metric&appid=db9d09ddea4c35eaccbd69c825ac7bed"
     try:
         response = requests.get(url)
         response.raise_for_status()  # Check for HTTP errors

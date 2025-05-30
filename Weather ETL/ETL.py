@@ -28,8 +28,8 @@ class WeatherData:
         }
 
 # Fetch weather data from the API
-def fetch_weather(lon, lat, units, appid, city):
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&units={metric}&appid={db9d09ddea4c35eaccbd69c825ac7bed}"
+def fetch_weather(lon, lat, units, condition, appid, city):
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={29.64}&lon={95.28}&units=metric&appid=db9d09ddea4c35eaccbd69c825ac7bed"
 # api key db9d09ddea4c35eaccbd69c825ac7bed
     try:
         # Make the API request
